@@ -1,6 +1,8 @@
 const uploadImageToCloudinary = require('../middlewares/cloudinary');
 const { deleteFromCloudinary } = require('../middlewares/deleteFromCloudinary');
 const User = require('../models/User');
+const redis = require('../services/redisClient');
+
 
 // Signup Controller
 exports.signup = async (req, res) => {
@@ -85,6 +87,10 @@ exports.getUsers = async (req, res) => {
     
     // Count total users
     const totalUsers = await User.countDocuments();
+    await redis.set(res.locals.cacheKey, JSON.stringify({
+      users,
+      userCount: totalUsers
+    }), 'EX', 30);
 
     res.status(200).json({
       users,
@@ -164,7 +170,7 @@ exports.updateUser = async (req, res) => {
         userLogoUrl = findUser.userLogoUrl;
         userLogoPublicId = findUser.userLogoPublicId;
     }
-
+    const fcmToken = findUser.fcmToken;
     const user = User.findByIdAndUpdate(id,{
       fullName,
       username,
@@ -176,7 +182,8 @@ exports.updateUser = async (req, res) => {
       status,
       role,
       userLogoUrl,
-      userLogoPublicId
+      userLogoPublicId,
+      fcmToken 
     },{
       new : true
     });
