@@ -119,6 +119,7 @@ router.post('/store-user-fcmToken-&-userId', async (req, res) => {
 // Function to Get Access Token
 async function getAccessToken() {
   return new Promise((resolve, reject) => {
+    console.log("PRIVATE KEY:", process.env.FIREBASE_PRIVATE_KEY);
     // Initialize JWT Client with your service account credentials
     const jwtClient =  new google.auth.JWT(
       // key.client_email,
@@ -268,6 +269,7 @@ router.post("/send-notification-to-all-users", async (req, res) => {
 router.post("/send-notification-to-all-companies", async (req, res) => {
   try {
     const { title, body } = req.body;
+    console.log(req.body)
     if (!title || !body) return res.status(400).json({ error: "Title and body are required" });
 
     const companies = await Company.find({}, "fcmToken");
@@ -279,6 +281,7 @@ router.post("/send-notification-to-all-companies", async (req, res) => {
     const messageResults = await sendNotificationToAll(fcmTokens, title, body);
     res.status(200).json({ message: "Notification sent to all users", results: messageResults });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: error.message });
   }
 });
