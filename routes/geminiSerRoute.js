@@ -9,15 +9,13 @@ function containsBlockedKeyword(input) {
   return blockedKeywords.some(keyword => lowerInput.includes(keyword));
 }
 
-async function geminiChatResponse(userQuery, restrictQuery = "answer all type of question") {
+async function geminiChatResponse(userQuery) {
   try {
     if (containsBlockedKeyword(userQuery)) {
       return "Sorry, I'm not allowed to answer that question.";
     }
 
-    const prompt = `You have to answer only questions related to: "${restrictQuery}". 
-If the question is unrelated to ${restrictQuery}, respond: "This question is not related to ${restrictQuery}, so I cannot answer it."
-Now answer briefly (in 3 lines max): ${userQuery}`;
+    const prompt = `Answer the following question briefly (in 3 lines max): ${userQuery}`;
 
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash",
