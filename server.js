@@ -125,7 +125,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const warehouseRoutes = require('./routes/warehouseRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const { getGeminiResponse } = require("./routes/geminiServiceRoute");
-const {geminiResponse } = require("./routes/geminiSerRoute");
+const {geminiChatResponse } = require("./routes/geminiSerRoute");
 
 const app = express();
 const server = http.createServer(app);
@@ -188,7 +188,7 @@ app.post('/api/chat', async (req , res)=>{
   try {
     console.log(req.body)
    const {text} = req.body;
-   let geminiResponse = await geminiResponse(text); 
+   let geminiResponse = await geminiesponse(text); 
    res.status(200).send({message:"chat successfully recive" , geminiResponse});
   } catch (error) {
     console.log(error)

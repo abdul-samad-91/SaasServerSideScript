@@ -9,7 +9,7 @@ function containsBlockedKeyword(input) {
   return blockedKeywords.some(keyword => lowerInput.includes(keyword));
 }
 
-async function geminiResponse(userQuery, restrictQuery = "answer all type of question") {
+async function geminiChatResponse(userQuery, restrictQuery = "answer all type of question") {
   try {
     if (containsBlockedKeyword(userQuery)) {
       return "Sorry, I'm not allowed to answer that question.";
