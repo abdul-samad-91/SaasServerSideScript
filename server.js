@@ -143,7 +143,7 @@ app.use(
 // ✅ Middleware
 app.use(express.json());
 app.use(cors({
-  origin: 'https://ai-voice-chat-drab.vercel.app'
+  origin: '*'
 }));
 
 // ✅ Serve Static Files
