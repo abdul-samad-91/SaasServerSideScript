@@ -143,7 +143,7 @@ app.use(
 // ✅ Middleware
 app.use(express.json());
 app.use(cors({
-  origin: '*',  
+  origin: ['https://ai-voice-chat-drab.vercel.app']
 }));
 
 // ✅ Serve Static Files
@@ -159,7 +159,7 @@ connectDB();
 // ✅ Initialize Socket.IO
 const io = new Server(server, {
   cors: {
-    origin:"*",
+    origin:["*"],
     // methods: ["GET", "POST"],
   },
 });
