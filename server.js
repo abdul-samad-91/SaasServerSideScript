@@ -125,6 +125,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const warehouseRoutes = require('./routes/warehouseRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const { getGeminiResponse } = require("./routes/geminiServiceRoute");
+const {geminiResponse } = require("./routes/geminiSerRoute");
 
 const app = express();
 const server = http.createServer(app);
@@ -183,6 +184,17 @@ app.use("/api/receive", receivePayRoutes);
 app.use("/v1/api/notification", messagingRoutes);
 app.use("/api/onhand", onhandRoutes);
 app.use("/api/payment", paymentRoutes);
+app.post('/api/chat', async (req , res)=>{
+  try {
+    console.log(req.body)
+   const {text} = req.body;
+   let geminiResponse = await geminiResponse(text); 
+   res.status(200).send({message:"chat successfully recive" , geminiResponse});
+  } catch (error) {
+    console.log(error)
+    res.status(200).send({ error : "somthing went wrong"})
+  }
+});
 
 // ✅ Chat Route (Calls Gemini Service)
 app.post("/chat", async (req, res) => {
