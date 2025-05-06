@@ -1,4 +1,4 @@
-import { GoogleGenAI } from "@google/genai";
+const { GoogleGenAI } = require("@google/genai");
 
 const ai = new GoogleGenAI({ apiKey: "AIzaSyCwHvqQw5JKrNZHBp_kWU5pe15k7g74a_k" });
 
@@ -9,7 +9,7 @@ function containsBlockedKeyword(input) {
   return blockedKeywords.some(keyword => lowerInput.includes(keyword));
 }
 
-export async function geminiResponse(userQuery, restrictQuery="answer all type of question") {
+async function geminiResponse(userQuery, restrictQuery = "answer all type of question") {
   try {
     if (containsBlockedKeyword(userQuery)) {
       return "Sorry, I'm not allowed to answer that question.";
@@ -41,3 +41,5 @@ Now answer briefly (in 3 lines max): ${userQuery}`;
     console.error("Error fetching Gemini response:", error);
   }
 }
+
+module.exports = { geminiResponse };
