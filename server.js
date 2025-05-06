@@ -188,7 +188,7 @@ app.post('/api/chat', async (req , res)=>{
   try {
     console.log(req.body)
    const {text} = req.body;
-   let geminiResponse = await geminiesponse(text); 
+   let geminiResponse = await geminiChatResponse(text); 
    res.status(200).send({message:"chat successfully recive" , geminiResponse});
   } catch (error) {
     console.log(error)
