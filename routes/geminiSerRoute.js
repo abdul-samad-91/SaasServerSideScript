@@ -42,4 +42,4 @@ Now answer briefly (in 3 lines max): ${userQuery}`;
   }
 }
 
-module.exports = { geminiResponse };
+module.exports = { geminiChatResponse };
