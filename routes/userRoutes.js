@@ -9,7 +9,6 @@ const {companyMiddleware} = require('../middlewares/companyMiddleware.js')
 const router = express.Router();
 const cacheMiddleware = require('../services/cacheMiddleware');
 
-
 // Login 
 router.post('/login',login)
 // Signup 
@@ -24,4 +23,5 @@ router.delete('/delete/:id',authMiddleware(["superadmin","admin","manager"]), de
 router.post('/forget-password', generateResetToken);
 router.post('/verifyOTP', verifyOTP);
 router.post('/reset-password', resetPassword);
+
 module.exports = router;
