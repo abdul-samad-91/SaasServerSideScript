@@ -1,7 +1,7 @@
 const uploadImageToCloudinary = require('../middlewares/cloudinary');
 const { deleteFromCloudinary } = require('../middlewares/deleteFromCloudinary');
 const User = require('../models/User');
-const redis = require('../services/redisClient');
+// const redis = require('../services/redisClient');
 
 
 // Signup Controller
@@ -87,10 +87,10 @@ exports.getUsers = async (req, res) => {
     
     // Count total users
     const totalUsers = await User.countDocuments();
-    await redis.set(res.locals.cacheKey, JSON.stringify({
-      users,
-      userCount: totalUsers
-    }), 'EX', 1);
+    // await redis.set(res.locals.cacheKey, JSON.stringify({
+    //   users,
+    //   userCount: totalUsers
+    // }), 'EX', 1);
 
     res.status(200).json({
       users,

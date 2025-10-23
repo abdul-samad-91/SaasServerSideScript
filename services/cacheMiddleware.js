@@ -1,4 +1,4 @@
-const redis = require('../services/redisClient'); // Import the redis client
+// const redis = require('../services/redisClient'); // Import the redis client
 
 const cacheMiddleware = (keyPrefix) => async (req, res, next) => {
   try {

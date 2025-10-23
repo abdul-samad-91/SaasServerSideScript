@@ -1,5 +1,5 @@
 const Category = require('../models/Category');
-const redis = require('../services/redisClient')
+// const redis = require('../services/redisClient')
 
 // Add New Category
 exports.addCategory = async (req, res) => {

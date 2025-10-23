@@ -1,7 +1,7 @@
 const Product = require('../models/Product');
 const uploadImageToCloudinary = require('../middlewares/cloudinary');
 const { deleteFromCloudinary } = require('../middlewares/deleteFromCloudinary');
-const redis = require('../services/redisClient');
+// const redis = require('../services/redisClient');
 
 // Create a new product
 exports.createProduct = async (req, res) => {
@@ -60,7 +60,7 @@ exports.getAllProducts = async (req, res) => {
         },
       });
 
-      await redis.set(res.locals.cacheKey, JSON.stringify(products), 'EX', 1);
+      // await redis.set(res.locals.cacheKey, JSON.stringify(products), 'EX', 1);
     res.status(200).json(products);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching products', error });

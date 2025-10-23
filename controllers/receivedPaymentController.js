@@ -1,5 +1,5 @@
 const ReceivedPayment = require('../models/receivedPayment');
-const redis = require('../services/redisClient')
+// const redis = require('../services/redisClient')
 
 
 // Get all received payments
@@ -15,12 +15,12 @@ exports.getReceivedPayments = async (req, res) => {
 
     const total = await ReceivedPayment.countDocuments(query);
 
-    await redis.set(res.locals.cacheKey, JSON.stringify({
-      receivedPayments,
-      total,
-      currentPage: parseInt(page),
-      totalPages: Math.ceil(total / limit),
-    }), 'EX', 1);
+    // await redis.set(res.locals.cacheKey, JSON.stringify({
+    //   receivedPayments,
+    //   total,
+    //   currentPage: parseInt(page),
+    //   totalPages: Math.ceil(total / limit),
+    // }), 'EX', 1);
 
     res.status(200).json({
       receivedPayments,

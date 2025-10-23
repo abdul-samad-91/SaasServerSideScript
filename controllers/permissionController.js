@@ -1,5 +1,5 @@
 const Permissions = require('../models/permissions');
-const redis = require('../services/redisClient')
+// const redis = require('../services/redisClient')
 
   exports.createPermission = async (req, res) => {
     try {
@@ -56,12 +56,12 @@ const redis = require('../services/redisClient')
         { $count: "totalPermissions" } 
       ]);
       
-      await redis.set(res.locals.cacheKey, JSON.stringify({
-        permission,
-        permissionCount: permissionCount.length > 0 ? permissionCount[0].totalPermissions : 0,
-        currentPage: parseInt(page),
-        totalPages: Math.ceil(permissionCount.length > 0 ? permissionCount[0].totalPermissions / limit : 1)
-      }), 'EX', 1);
+      // await redis.set(res.locals.cacheKey, JSON.stringify({
+      //   permission,
+      //   permissionCount: permissionCount.length > 0 ? permissionCount[0].totalPermissions : 0,
+      //   currentPage: parseInt(page),
+      //   totalPages: Math.ceil(permissionCount.length > 0 ? permissionCount[0].totalPermissions / limit : 1)
+      // }), 'EX', 1);
 
       res.status(200).json({
         permission,

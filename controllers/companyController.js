@@ -2,7 +2,7 @@ const uploadImageToCloudinary = require('../middlewares/cloudinary');
 const { deleteFromCloudinary } = require('../middlewares/deleteFromCloudinary');
 const Company = require('../models/Company');
 const bcrypt = require('bcryptjs');
-const redis = require('../services/redisClient');
+// const redis = require('../services/redisClient');
 // const fs = require('fs');
 exports.createCompany = async (req, res) => {
   try {
@@ -224,7 +224,7 @@ exports.getCompanies = async (req, res) => {
 
     // Cache the result for 1 hour
     // await redis.set(res.locals.cacheKey, JSON.stringify(result), 'EX', 3600);
-    await redis.set(res.locals.cacheKey, JSON.stringify(result), 'EX', 1);
+    // await redis.set(res.locals.cacheKey, JSON.stringify(result), 'EX', 1);
 
     res.status(200).json(result);
   } catch (error) {
