@@ -108,7 +108,7 @@ const cors = require("cors");
 const path = require("path");
 const os = require("os");
 const http = require("http");
-const { Server } = require("socket.io");
+// const { Server } = require("socket.io");
 
 
 const productRoutes = require('./routes/productRoutes');
@@ -157,18 +157,18 @@ app.get("/", (req, res) => {
 connectDB();
 
 // ✅ Initialize Socket.IO
-const io = new Server(server, {
-  cors: {
-    origin:["*"],
-    // methods: ["GET", "POST"],
-  },
-});
-app.set("io", io);
+// const io = new Server(server, {
+//   cors: {
+//     origin:["*"],
+//     // methods: ["GET", "POST"],
+//   },
+// });
+// app.set("io", io);
 
 // ✅ Handle Sockets (Move Logic to Separate File)
-const handleSockets = require("./services/socketHandler");
+// const handleSockets = require("./services/socketHandler");
 // console.log('handle socket is running')
-handleSockets(io);
+// handleSockets(io);
 
 // ✅ API Routes
 app.use("/api/companies", companyRoutes);

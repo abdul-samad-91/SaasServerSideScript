@@ -36,7 +36,7 @@ exports.addCategory = async (req, res) => {
           select: 'companyName', // Fetch companyName from Company model
         },
       });
-      await redis.set(res.locals.cacheKey, JSON.stringify(categories), 'EX', 1);
+      // await redis.set(res.locals.cacheKey, JSON.stringify(categories), 'EX', 1);
 
       res.status(200).json(categories);
     } catch (error) {
