@@ -141,10 +141,15 @@ app.use(
 );
 
 // ✅ Middleware
-app.use(express.json());
 app.use(cors({
-  origin: '*'
+  origin: ["https://saas-admin-dashboard-six.vercel.app"], // ✅ frontend domain
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true, // ✅ if using cookies or JWT
 }));
+app.use(express.json());
+// app.use(cors({
+//   origin: '*'
+// }));
 
 // ✅ Serve Static Files
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
